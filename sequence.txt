@@ -1,0 +1,14 @@
+1.Tạo models và migration:
+- php artisan make:model Product -m
+
+- Lệnh migrate fresh: php artisan migrate:fresh
+
+2. Chạy project trên môi trường Local Network
+- php artisan serve --host 192.168.1.7 --port 80
+
+3. Cài HTTP Client: composer require guzzlehttp/guzzle
+
+
+NOTE: Lưu ý khi dùng POSTMAN:
+    - Dùng phương thức GET: -> dữ liệu truy6en2 vào là params
+    - Dùng phương thức POST: -> dữ liệu truyền vào là body/form-data
