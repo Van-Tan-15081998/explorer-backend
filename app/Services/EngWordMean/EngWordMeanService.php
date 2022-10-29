@@ -35,4 +35,9 @@ class EngWordMeanService
 
         return $returnData;
     }
+
+    public function get($wordId)
+    {
+        return $this->EngWordMeanRepo->get($wordId);
+    }
 }

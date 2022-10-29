@@ -7,7 +7,7 @@ interface EngWordMeanRepositoryInterface
 
     public function save($data);
 
-    public function get($data);
+    public function get($wordId);
 
     public function delete($id);
 

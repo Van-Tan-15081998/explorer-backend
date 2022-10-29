@@ -4,6 +4,7 @@ namespace App\Repositories\WordMean;
 
 use App\Repositories\WordMean\WordMeanRepositoryInterface;
 use App\Models\WordMeanModel;
+use App\Models\ExampleByTypeWordModel;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
@@ -138,6 +139,10 @@ class WordMeanMysqlRepository implements WordMeanRepositoryInterface
             ],
         );
 
+        // Nếu trong CSDL có tồn tại một record có các thuộc tính giống array đầu tiên thì array đó sẽ được cập nhật phần example (array thứ 2)
+        // Nếu trong CSDL không tồn tại một record nào có thuộc tính giống array đầu tiên, một record mới sẽ được tạo ra với các thuộc tính của cả 
+        // array đầu tiên và array thứ 2
+
         return $wordMean;
     }
 
@@ -197,6 +202,113 @@ class WordMeanMysqlRepository implements WordMeanRepositoryInterface
         }
 
         return $returnData;
+    }
+
+
+    public function getWordMeanPopularity($wordId)
+    {
+        $returnData = [];
+
+        $wordMean = WordMeanModel::select('*')
+            ->where(
+                [
+                    ['word_id', '=', $wordId],
+                    ['is_popularity', '=', 1]
+                ]
+            )->first();
+
+        if ($wordMean) {
+            $wordMean = $wordMean->toArray();
+            $returnData = [
+                'id' => $wordMean['id'],
+                'word_id' => $wordMean['word_id'],
+                'mean' => $wordMean['mean'],
+                'is_popularity' => $wordMean['is_popularity'],
+            ];
+        }
+
+        return $returnData;
+    }
+
+    public function updateVieWordMeanByTypeWord($data)
+    {
+        $wordMean = null;
+
+        // Kiểm tra dữ liệu đầu vào
+        $validator = Validator::make(
+            $data,
+            $rules = [
+                'mean' => 'required',
+            ],
+            $messages = [
+                'required' => 'Trường :attribute là trường bắt buộc',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+            $error = $validator->errors();
+
+            throw new ValidationException($error->messages());
+        }
+
+        $wordMean = WordMeanModel::find($data['id']);
+
+        $wordMean->mean = trim($data['mean']);
+
+        $wordMean->save();
+
+        return $wordMean;
+    }
+    public function deleteVieWordMeanByTypeWord($data)
+    {
+        $wordMean = WordMeanModel::find($data['id']);
+
+        $deletedExamples = ExampleByTypeWordModel::where('word_mean_id', $wordMean->id)->delete();
+
+        if ($wordMean->delete() && $deletedExamples) {
+            return true;
+        } else return false;
+    }
+    public function updateEngWordMeanByTypeWord($data)
+    {
+        $wordMean = null;
+
+        // Kiểm tra dữ liệu đầu vào
+        $validator = Validator::make(
+            $data,
+            $rules = [
+                'mean' => 'required',
+            ],
+            $messages = [
+                'required' => 'Trường :attribute là trường bắt buộc',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+            $error = $validator->errors();
+
+            throw new ValidationException($error->messages());
+        }
+
+        $wordMean = WordMeanModel::find($data['id']);
+
+        $wordMean->mean = trim($data['mean']);
+
+        $wordMean->save();
+
+        return $wordMean;
+    }
+    public function deleteEngWordMeanByTypeWord($data)
+    {
+        $wordMean = WordMeanModel::find($data['id']);
+
+        $deletedExamples = ExampleByTypeWordModel::where('word_mean_id', $wordMean->id)->delete();
+
+        if ($wordMean->delete() && $deletedExamples) {
+            return true;
+        } else return false;
     }
 
     public function deleteWordMean($id)

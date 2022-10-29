@@ -43,8 +43,28 @@ class EngWordMeanMysqlRepository implements EngWordMeanRepositoryInterface
         return $engWordMean;
     }
 
-    public function get($data)
+    public function get($wordId)
     {
+        $returnData = [];
+
+        $wordMeans = EngWordMeanModel::select('*')
+            ->where(
+                [
+                    ['word_id', '=', $wordId],
+                ]
+            )->first();
+
+        if ($wordMeans) {
+            $returnData = [
+                'id'    => $wordMeans->id,
+                'mean'    => $wordMeans->mean,
+                'example'    => $wordMeans->example,
+                'word_id'    => $wordMeans->word_id,
+                'type_word_id'    => $wordMeans->type_word_id,
+            ];
+        }
+
+        return $returnData;
     }
 
     public function delete($id)

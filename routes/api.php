@@ -64,6 +64,18 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('save-eng-word-mean', [WordController::class, 'saveEngWordMean'])->name('');
 
         Route::post('save-word-mean-popularity', [WordController::class, 'saveWordMeanPopularity'])->name('');
+
+        Route::post('save-example-to-vie-word-mean-by-type-word', [WordController::class, 'saveExampleToVieWordMeanByTypeWord'])->name('');
+        Route::post('delete-example-of-vie-word-mean-by-type-word', [WordController::class, 'deleteExampleOfVieWordMeanByTypeWord'])->name('');
+
+        Route::post('save-example-to-eng-word-mean-by-type-word', [WordController::class, 'saveExampleToEngWordMeanByTypeWord'])->name('');
+        Route::post('delete-example-of-eng-word-mean-by-type-word', [WordController::class, 'deleteExampleOfEngWordMeanByTypeWord'])->name('');
+
+        Route::post('update-vie-word-mean-by-type-word', [WordController::class, 'updateVieWordMeanByTypeWord'])->name('');
+        Route::post('delete-vie-word-mean-by-type-word', [WordController::class, 'deleteVieWordMeanByTypeWord'])->name('');
+
+        Route::post('update-eng-word-mean-by-type-word', [WordController::class, 'updateEngWordMeanByTypeWord'])->name('');
+        Route::post('delete-eng-word-mean-by-type-word', [WordController::class, 'deleteEngWordMeanByTypeWord'])->name('');
     });
 
     Route::group(['prefix' => 'pronounce'], function () {

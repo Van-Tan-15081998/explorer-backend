@@ -65,22 +65,33 @@ class WordService
         $returnData = [];
 
         $dataWordExamples = $this->ExampleService->get($dataWord->id);
+        // return $dataWordExamples;
 
         $dataWordPronounce = $this->PronounceService->get($dataWord->id);
+        // return $dataWordPronounce;
 
         $dataVieWordMeanByTypeWords = $this->WordMeanService->getVieWordMeanByTypeWord($dataWord->id);
+        // return $dataVieWordMeanByTypeWords;
 
         $dataEngWordMeanByTypeWords = $this->WordMeanService->getEngWordMeanByTypeWord($dataWord->id);
+        // return $dataEngWordMeanByTypeWords;
+
+        $dataWordMeanPopularity = $this->WordMeanService->getWordMeanPopularity($dataWord->id);
+        // return $dataWordMeanPopularity;
+
+        $dataEngWordMean = $this->EngWordMeanService->get($dataWord->id);
+        // return $dataWordMeanPopularity;
 
         $returnData = [
             'id'        =>  $dataWord->id,
             'word'      =>  $dataWord->word,
             'popularity' =>  $dataWord->popularity,
-
+            'word_mean_popularity' => $dataWordMeanPopularity,
             'examples'  => $dataWordExamples,
             'pronounce' => $dataWordPronounce,
             'vie_word_mean_by_type_word' => $dataVieWordMeanByTypeWords,
             'eng_word_mean_by_type_word' => $dataEngWordMeanByTypeWords,
+            'eng_word_mean'  => $dataEngWordMean
         ];
 
         return $returnData;
@@ -246,5 +257,42 @@ class WordService
     public function saveEngWordMean(Request $request)
     {
         return $this->EngWordMeanService->save($request);
+    }
+
+    public function saveExampleToVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->ExampleByTypeWordService->saveVieSingle($request);
+    }
+
+    public function saveExampleToEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->ExampleByTypeWordService->saveEngSingle($request);
+    }
+
+    public function deleteExampleOfVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->ExampleByTypeWordService->delete($request);
+    }
+
+    public function deleteExampleOfEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->ExampleByTypeWordService->delete($request);
+    }
+
+    public function updateVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->WordMeanService->updateVieWordMeanByTypeWord($request);
+    }
+    public function deleteVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->WordMeanService->deleteVieWordMeanByTypeWord($request);
+    }
+    public function updateEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->WordMeanService->updateEngWordMeanByTypeWord($request);
+    }
+    public function deleteEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->WordMeanService->deleteEngWordMeanByTypeWord($request);
     }
 }

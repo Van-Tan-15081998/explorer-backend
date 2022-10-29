@@ -15,7 +15,17 @@ interface WordMeanRepositoryInterface
 
     public function getEng($wordId);
 
+    public function getWordMeanPopularity($wordId);
+
     public function deleteWordMean($id);
 
     public function updateWordMean($id, $data);
+
+    public function updateVieWordMeanByTypeWord($request);
+
+    public function deleteVieWordMeanByTypeWord($request);
+
+    public function updateEngWordMeanByTypeWord($request);
+
+    public function deleteEngWordMeanByTypeWord($request);
 }

@@ -63,4 +63,44 @@ class ExampleByTypeWordService
     {
         return $this->ExampleByTypeWordRepo->getEng($wordId, $typeWordId, $wordMeanId);
     }
+
+    public function saveEngSingle(Request $request)
+    {
+        $returnData = [];
+
+        if ($exampleResult = $this->ExampleByTypeWordRepo->saveEngSingle($request->all())) {
+            $returnData = [
+                'id'    => $exampleResult->id,
+                'example'  =>  $exampleResult->example,
+                'word_id' =>  $exampleResult->word_id,
+                'type_word_id' =>  $exampleResult->type_word_id,
+                'word_mean_id' => $exampleResult->word_mean_id,
+            ];
+        }
+
+        return $returnData;
+    }
+
+    public function saveVieSingle(Request $request)
+    {
+        $returnData = [];
+
+        if ($exampleResult = $this->ExampleByTypeWordRepo->saveVieSingle($request->all())) {
+            $returnData = [
+                'id'    => $exampleResult->id,
+                'example'  =>  $exampleResult->example,
+                'word_id' =>  $exampleResult->word_id,
+                'type_word_id' =>  $exampleResult->type_word_id,
+                'word_mean_id' => $exampleResult->word_mean_id,
+                'is_vie_mean' => $exampleResult->is_vie_mean,
+            ];
+        }
+
+        return $returnData;
+    }
+
+    public function delete(Request $request)
+    {
+        return  $this->ExampleByTypeWordRepo->delete($request);
+    }
 }

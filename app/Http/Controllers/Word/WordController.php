@@ -184,4 +184,113 @@ class WordController extends Controller
             return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
         }
     }
+
+    public function saveExampleToVieWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->saveExampleToVieWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+
+    public function saveExampleToEngWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->saveExampleToEngWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+
+    public function deleteExampleOfVieWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->deleteExampleOfVieWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+
+    public function deleteExampleOfEngWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->deleteExampleOfEngWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+
+    public function updateVieWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->updateVieWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+    public function updateEngWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->updateEngWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+    public function deleteVieWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->deleteVieWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
+    public function deleteEngWordMeanByTypeWord(Request $request)
+    {
+        try {
+            $wordMean = $this->WordService->deleteEngWordMeanByTypeWord($request);
+            return response()->json($this->sentResponseSuccessful($wordMean));
+        } catch (ValidationException $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getValidationErrors(), null));
+        } catch (\Exception $e) {
+
+            return response()->json($this->sentResponseFail(1, $e->getMessage(), null));
+        }
+    }
 }

@@ -77,6 +77,11 @@ class WordMeanService
         return $returnData;
     }
 
+    public function getWordMeanPopularity($wordId)
+    {
+        return $this->wordMeanRepo->getWordMeanPopularity($wordId);
+    }
+
     public function getVieWordMeanByTypeWord($wordId)
     {
 
@@ -117,5 +122,22 @@ class WordMeanService
         }
 
         return $engWordMeanByTypeWords;
+    }
+
+    public function updateVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->wordMeanRepo->updateVieWordMeanByTypeWord($request->all());
+    }
+    public function deleteVieWordMeanByTypeWord(Request $request)
+    {
+        return $this->wordMeanRepo->deleteVieWordMeanByTypeWord($request->all());
+    }
+    public function updateEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->wordMeanRepo->updateEngWordMeanByTypeWord($request->all());
+    }
+    public function deleteEngWordMeanByTypeWord(Request $request)
+    {
+        return $this->wordMeanRepo->deleteEngWordMeanByTypeWord($request->all());
     }
 }
